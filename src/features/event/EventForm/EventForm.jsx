@@ -9,13 +9,32 @@ class EventForm extends Component {
         city: '',
         venue: '',
         hostedBy: ''
-    }
+    };
+
+    // lifecycle methods
+
+    // check to see if we the selected event inside the prop obj is null
+    // set the state to the props of the selected event -- will override the current state
+    componentDidMount() {
+        if (this.props.selectedEvent !== null) {
+            this.setState({
+                ...this.props.selectedEvent
+            });
+        };
+    };
+
     handleFormSubmit = (event) => {
         event.preventDefault();
 
-        this.props.createEvent(this.state);
-        console.log(this.state);
-    }
+        // check if exisitng vs updated event
+        if (this.state.id) {
+            this.props.updateEvent(this.state);
+        } else {
+            this.props.createEvent(this.state);
+        };
+
+
+    };
 
     handleInputChange = ({target: {name, value}}) => {
         // get the value from the input field and change the title state

@@ -8,7 +8,7 @@ const eventsFromDashBoard = [
     {
         id: '1',
         title: 'Trip to Tower of London',
-        date: '2018-03-27T11:00:00+00:00',
+        date: '2018-03-27T11',
         category: 'culture',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -32,7 +32,7 @@ const eventsFromDashBoard = [
     {
         id: '2',
         title: 'Trip to Punch and Judy Pub',
-        date: '2018-03-28T14:00:00+00:00',
+        date: '2018-03-28T14',
         category: 'drinks',
         description:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -60,16 +60,33 @@ class EventDashboard extends Component {
     // manage state
     state = {
         events: eventsFromDashBoard,
-        isOpen: false
+        isOpen: false,
+        selectedState: null // will contain an event object
     };
 
     // handling if the form to the event will display or not
-    handleIsOpenToggle = () => {
-        // compare to the prev state and switch to the opposite of that state
-        this.setState(({ isOpen }) => ({
-            isOpen: !isOpen
-        }))
-    }
+    // handleIsOpenToggle = () => {
+    //     // compare to the prev state and switch to the opposite of that state
+    //     this.setState(({ isOpen }) => ({
+    //         isOpen: !isOpen
+    //     }))
+    // }
+
+    // handling opening of form when creating an event
+    handleCreateFormOpen = () => {
+        this.setState({
+            isOpen: true,
+            selectedEvent: null
+        });
+    };
+
+    handleFormCancel = () => {
+        this.setState({
+            isOpen: false
+        });
+    };
+
+
 
     // event to create event based on data submitted from the form
     handleCreateEvent = (newEvent) => {
@@ -77,23 +94,62 @@ class EventDashboard extends Component {
         newEvent.hostPhotoURL = '/assets/users/.png';
 
         // set the state to the exisiting events + the new event added
-        this.setState(({events}) => ({
+        this.setState(({ events }) => ({
             events: [...events, newEvent],
             isOpen: false
-        }))
-    }
+        }));
+    };
+
+    // handling event selection
+    handleSelectEvent = (event) => {
+        this.setState({
+            selectedEvent: event,
+            isOpen: true
+        });
+    };
+
+    // handling update of an event
+    handleUpdateEvent = (updatedEvent) => {
+        this.setState(({ events }) => ({
+            // assign the array of events with the included updated change to that 1 event
+            events: events.map(exisitingEvent => {
+                // check for the event
+                if (events.id === updatedEvent.id) {
+                    return { ...updatedEvent };
+                } else {
+                    return exisitingEvent;
+                }
+            }),
+            isOpen: false,
+            selectedEvent: null
+        }));
+    };
+
+    // handling deletion of events
+    handleDeleteEvent = (id) => {
+        this.setState(({ events }) => ({
+            events: events.filter(e => e.id !== id)
+        }));
+    };
 
     render() {
-        const { events, isOpen } = this.state;
+        const { events, isOpen, selectedEvent } = this.state;
         return (
             <Grid>
                 <Grid.Column width={10}>
                     {/* pass down the events as props */}
-                    <EventList events={events}/>
+                    <EventList events={events} selectEvent={this.handleSelectEvent} deleteEvent={this.handleDeleteEvent}/>
                 </Grid.Column>
                 <Grid.Column width={6}>
-                    <Button onClick={this.handleIsOpenToggle} positive content="Create Event" />
-                    {isOpen && <EventForm createEvent={this.handleCreateEvent} cancelFormOpen={this.handleIsOpenToggle} />}
+                    <Button onClick={this.handleCreateFormOpen} positive content="Create Event" />
+                    {isOpen && (
+                        <EventForm
+                            key={selectedEvent ? selectedEvent.id : 0}
+                            updateEvent={this.handleUpdateEvent}
+                            selectedEvent={selectedEvent}
+                            createEvent={this.handleCreateEvent}
+                            cancelFormOpen={this.handleFormCancel} />
+                    )}
                 </Grid.Column>
             </Grid>
         )
