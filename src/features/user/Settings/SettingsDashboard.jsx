@@ -13,12 +13,12 @@ const SettingsDashboard = () => {
         <Grid>
             <Grid.Column width={12}>
                 <Switch>
-                <Redirect exact from='/settings' to='/settings/basic' />
-                {/* load up different compoents inside settings component depending on what route was selected */}
-                <Route path='/settings/basic' component={BasicPage} />
-                <Route path='/settings/about' component={AboutPage} />
-                <Route path='/settings/photos' component={PhotosPage}/>
-                <Route path='/settings/account' component={AccountPage} />
+                    <Redirect exact from='/settings' to='/settings/basic' />
+                    {/* load up different compoents inside settings component depending on what route was selected */}
+                    <Route path='/settings/basic' component={BasicPage} />
+                    <Route path='/settings/about' component={AboutPage} />
+                    <Route path='/settings/photos' component={PhotosPage}/>
+                    <Route path='/settings/account' component={AccountPage} />
                 </Switch>
             </Grid.Column>
             <Grid.Column width={4}>
