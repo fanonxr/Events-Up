@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Menu, Button } from 'semantic-ui-react';
+import { NavLink, Link } from 'react-router-dom';
 
 export default class extends Component {
     render() {
@@ -7,13 +8,28 @@ export default class extends Component {
             <div>
                 <Menu inverted fixed="top">
                     <Container>
-                        <Menu.Item header>
+                        <Menu.Item
+                            as={NavLink}
+                            to='/'
+                            header
+                        >
                             <img src="assets/logo.png" alt="logo" />
                             Events Up
                         </Menu.Item>
-                        <Menu.Item name="Events" />
+                        <Menu.Item
+                            as={NavLink}
+                            to='/people'
+                            name="People"
+                        />
                         <Menu.Item>
-                            <Button floated="right" positive inverted content="Create Event" />
+                            <Button
+                                as={Link}
+                                to='/createEvent'
+                                floated="right"
+                                positive
+                                inverted
+                                content="Create Event"
+                            />
                         </Menu.Item>
                         <Menu.Item position="right">
                             <Button basic inverted content="Login" />

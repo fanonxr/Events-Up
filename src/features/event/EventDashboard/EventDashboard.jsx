@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import { EventList } from '../EventList/EventList';
-import { EventForm } from '../EventForm/EventForm';
+import EventForm  from '../EventForm/EventForm';
 import cuid from 'cuid';
 
 const eventsFromDashBoard = [
@@ -156,4 +156,4 @@ class EventDashboard extends Component {
     }
 }
 
-export { EventDashboard };
+export default EventDashboard;

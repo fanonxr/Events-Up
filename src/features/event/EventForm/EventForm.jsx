@@ -105,4 +105,4 @@ class EventForm extends Component {
     }
 }
 
-export { EventForm };
+export default EventForm;
