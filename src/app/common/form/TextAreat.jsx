@@ -10,4 +10,4 @@ const TextAreat = ({input, rows, width, type, placeholder, meta: {touched, error
     )
 }
 
-export default TextAreat
+export default TextAreat;

@@ -7,9 +7,11 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
+
+
 import SimpleMap from './SimpleMap';
 import TestPlaceInput from './TestPlaceInput';
-
+import { openModal } from '../modals/modalActions';
 // mapping the state to the props
 // mapping the store state - to component props
 const mapStateToProps = (state) => ({
@@ -18,7 +20,8 @@ const mapStateToProps = (state) => ({
 
 const actions = {
     incrementCounter,
-    decrementCounter
+    decrementCounter,
+    openModal
 }
 
 class TestComponent extends Component {
@@ -39,13 +42,14 @@ class TestComponent extends Component {
     }
 
     render() {
-        const { data, incrementCounter, decrementCounter } = this.props;
+        const { data, incrementCounter, decrementCounter, openModal } = this.props;
         return (
             <div>
                 <h2>Test compoenent</h2>
                 <h3>The answr is: {data}</h3>
                 <Button onClick={incrementCounter} positive content='Increment' />
                 <Button onClick={decrementCounter} negative content='Decrement' />
+                <Button onClick={() => openModal('TestModal', {data: 43})} positive content='Open modal'/>
                 <TestPlaceInput handleAddress={this.handleSelect}/>
                 <SimpleMap key={this.state.latlng.lng} latLng={this.state.latlng} />
             </div>

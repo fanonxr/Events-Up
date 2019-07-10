@@ -19,4 +19,4 @@ const DateInput = ({input, width, placeholder, meta: {touched, error}, ...rest})
     )
 }
 
-export default DateInput
+export default DateInput;
