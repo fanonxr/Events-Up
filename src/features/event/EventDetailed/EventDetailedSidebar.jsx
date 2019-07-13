@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Segment, Item, Label, List } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const EventDetailedSideBar = ({ attendees }) => {
     const isHost = false;
@@ -26,7 +27,7 @@ const EventDetailedSideBar = ({ attendees }) => {
                             <Item.Image size="tiny" src={attendee.photoURL} />
                             <Item.Content verticalAlign="middle">
                                 <Item.Header as="h3">
-                                    <a>{attendee.name}</a>
+                                <Link to={``}>{attendee.name}</Link>
                                 </Item.Header>
                             </Item.Content>
                         </Item>

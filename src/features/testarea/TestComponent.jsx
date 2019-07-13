@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { incrementAsync, decrementAsync} from './testActions';
 import { Button } from 'semantic-ui-react';
-import PlacesAutocomplete, {
+import {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
