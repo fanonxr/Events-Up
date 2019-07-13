@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { incrementCounter, decrementCounter } from './testActions';
+import { incrementAsync, decrementAsync} from './testActions';
 import { Button } from 'semantic-ui-react';
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -15,12 +15,14 @@ import { openModal } from '../modals/modalActions';
 // mapping the state to the props
 // mapping the store state - to component props
 const mapStateToProps = (state) => ({
-    data: state.test.data
-})
+    data: state.test.data,
+    loading: state.async.loading,
+    buttoneName: state.async.elementName
+});
 
 const actions = {
-    incrementCounter,
-    decrementCounter,
+    incrementAsync,
+    decrementAsync,
     openModal
 }
 
@@ -42,15 +44,20 @@ class TestComponent extends Component {
     }
 
     render() {
-        const { data, incrementCounter, decrementCounter, openModal } = this.props;
+        const { data, incrementAsync, decrementAsync, openModal, loading, buttonName } = this.props;
         return (
             <div>
                 <h2>Test compoenent</h2>
                 <h3>The answr is: {data}</h3>
-                <Button onClick={incrementCounter} positive content='Increment' />
-                <Button onClick={decrementCounter} negative content='Decrement' />
-                <Button onClick={() => openModal('TestModal', {data: 43})} positive content='Open modal'/>
-                <TestPlaceInput handleAddress={this.handleSelect}/>
+
+                <Button loading={buttonName === 'increment' && loading} onClick={(e) => incrementAsync(e.target.name)} positive content='Increment' />
+
+                <Button loading={buttonName === 'decrement' && loading} onClick={(e) => decrementAsync(e.target.name)} negative content='Decrement' />
+
+                <Button onClick={() => openModal('TestModal', { data: 43 })} positive content='Open modal' />
+
+                <TestPlaceInput handleAddress={this.handleSelect} />
+
                 <SimpleMap key={this.state.latlng.lng} latLng={this.state.latlng} />
             </div>
         )

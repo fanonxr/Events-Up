@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Icon } from 'semantic-ui-react';
-
-const AnyReactComponent = () => <Icon name='marker' size='big' color='red'></Icon>;
 
 class SimpleMap extends Component {
     static defaultProps = {
