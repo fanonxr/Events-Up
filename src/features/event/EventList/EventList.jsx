@@ -8,7 +8,7 @@ class EventList extends Component {
             <Fragment>
                 {/* loop over the events array and pass it down to each event list item */}
 
-                {events.map(event => (
+                {events && events.map(event => (
                     <EventListItem key={event.id} event={event} deleteEvent={deleteEvent}/>
                 ))}
 
