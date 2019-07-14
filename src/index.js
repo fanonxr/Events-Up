@@ -36,7 +36,7 @@ if (module.hot) {
 
 store.firebaseAuthIsReady.then(() => {
 	render();
-})
+});
 
 // ReactDOM.render(<App />, document.getElementById("root"));
 

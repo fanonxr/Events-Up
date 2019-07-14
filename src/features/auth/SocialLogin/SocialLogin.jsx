@@ -17,4 +17,4 @@ const SocialLogin = ({ socialLogin }) => {
     )
 }
 
-export default SocialLogin
+export default SocialLogin;

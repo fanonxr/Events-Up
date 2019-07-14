@@ -16,4 +16,4 @@ const SignedOutMenu = ({signIn, register}) => {
     )
 }
 
-export default SignedOutMenu
+export default SignedOutMenu;
