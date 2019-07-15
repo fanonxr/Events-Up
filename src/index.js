@@ -19,7 +19,7 @@ let render = () => {
 		<Provider store={store}>
 			<BrowserRouter>
 				<ScrollToTop>  {/* children - everything inside this component */}
-					<ReduxToastr position='bottom-right' transitionIn='fadeIn' transitionOut='fadeOut' />
+					<ReduxToastr position='bottom-right' transitionIn='fadeIn' transitionOut='fadeOut' progressBar />
 					<App />
 				</ScrollToTop>
 			</BrowserRouter>
