@@ -27,7 +27,7 @@ class App extends Component {
                             <Container className="main">
                                 <Switch key={this.props.location.key}>
                                     <Route exact path='/events' component={EventDashboard} />
-                                    <Route path='/events/:id' component={EventDetailed} />
+                                    <Route path='/event/:id' component={EventDetailed} />
                                     <Route path='/people' component={PeopleDashboard} />
                                     <Route path='/profile/:id' component={UserDetailedPage} />
                                     <Route path='/settings' component={SettingsDashboard} />
